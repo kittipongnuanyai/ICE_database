@@ -39,8 +39,8 @@
         android:background="#abffffff">
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:id="@+id/imageView"
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
