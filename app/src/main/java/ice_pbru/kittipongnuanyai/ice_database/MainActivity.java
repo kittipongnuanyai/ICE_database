@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     //Explicit
+    private EditText userEditText, passwordEditText;
+    private String userString, passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void clickSignIn(View view) {
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+        if (checkSpace()) {
+            //have space
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this,"ข้อผิดพลาด", "กรุณาตรวจสอบ username หรือ pass ให้ครบ");
+        } else {
+
+        }
+
+    }
+
+    private boolean checkSpace() {
+        return userString.equals("")||passwordString.equals("");
+    }
+
     public void testMyAlert(View view) {
         MyAlert myAlert = new MyAlert();
         myAlert.myDialog(this,"Alert","ทดสอบ");
@@ -33,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindwidget() {
+        userEditText = (EditText) findViewById(R.id.editText6);
+        passwordEditText = (EditText) findViewById(R.id.editText7);
 
 
     }//bind widget
