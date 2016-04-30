@@ -2,8 +2,19 @@ package ice_pbru.kittipongnuanyai.ice_database;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class SignUp extends AppCompatActivity {
 
@@ -39,6 +50,8 @@ public class SignUp extends AppCompatActivity {
 
         } else {
             //No space
+            Log.d("Kittipong --->", "Update to server");
+            updateValueToServer();
 
         }
 
@@ -46,12 +59,61 @@ public class SignUp extends AppCompatActivity {
 
     }//clickSignUp
 
+    private void updateValueToServer() {
+
+        String strURL = "http://ice.pbru.ac.th/ICE56/kittipong/addData.php";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add("isAdd","true")
+                .add("Name",nameString)
+                .add("Surname",surnameString)
+                .add("User",userString)
+                .add("Password",passwordString)
+                .add("Email",emailString)
+                .build();
+
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(strURL).post(requestBody).build();
+
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                try {
+                    finish();
+                    Log.d("Kittipong --> ", "Finish");
+
+                } catch (Exception e) {
+                    Log.d("Kittipong -->", "error" + e.toString());
+                }
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+    }//updateValueToServer
+
     private boolean checkSpace() {
         return nameString.equals("")||
                 surnameString.equals("")||
                 userString.equals("")||
                 passwordString.equals("")||
-                emailEditText.equals("");
+                emailString.equals("");
     }
 
 

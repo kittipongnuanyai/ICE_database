@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText userEditText, passwordEditText;
     private String userString, passwordString;
 
+    private MySQLite mySQLite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
      //bind widget
         bindwidget();
+
+        mySQLite = new MySQLite(this);
+
 
 
 
